@@ -4,7 +4,7 @@ const path = require('path')
 
 module.exports = {
   entry: {
-   main: './src/index.js',
+   main: './src/index.jsx',
   },
   output: {
     filename: '[name].[hash].js',
@@ -13,12 +13,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx$/,
         exclude: ['/node_modules'],
         use: [{ loader: 'babel-loader' }],
       },
       {
-        test: /\.s(a|c)ss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [{
           loader: 'style-loader',
         },
@@ -28,12 +28,18 @@ module.exports = {
         {
           loader: 'sass-loader'
         }],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [{
+          loader: 'file-loader'
+        }]
       }
     ]
   },
   plugins:  [
     new HtmlWebPackPlugin({
-      template: 'index.html'
+      template: './index.html'
     }),
     new CleanWebpackPlugin()
   ]
